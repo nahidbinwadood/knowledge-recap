@@ -1,0 +1,13 @@
+{
+  "name": "knowledge-recap",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "day:01": "tsx day-01/practice.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}
