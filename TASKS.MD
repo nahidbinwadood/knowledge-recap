@@ -1478,6 +1478,7 @@ Every day should contain:
 ```text
 practice/
 notes.md
+blog.md
 ```
 
 ---

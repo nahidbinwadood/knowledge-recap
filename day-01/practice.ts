@@ -11,6 +11,7 @@ type Status = 'active' | 'inactive';
 type User = {
   id: number;
   name: string;
+  email: string;
   age: number;
   role: Role;
   status: Status;
@@ -27,10 +28,62 @@ type CartItem = Product & {
 };
 
 const users: User[] = [
-  { id: 1, name: 'Amina', age: 26, role: 'admin', status: 'active' },
-  { id: 2, name: 'Rafi', age: 31, role: 'editor', status: 'inactive' },
-  { id: 3, name: 'Nila', age: 44, role: 'viewer', status: 'active' },
-  { id: 4, name: 'Siam', age: 38, role: 'editor', status: 'active' },
+  {
+    id: 1,
+    name: 'Amina',
+    email: 'amina@gmail.com',
+    age: 26,
+    role: 'admin',
+    status: 'active',
+  },
+  {
+    id: 2,
+    name: 'Rafi',
+    email: 'rafi@gmail.com',
+    age: 31,
+    role: 'editor',
+    status: 'inactive',
+  },
+  {
+    id: 3,
+    name: 'Nila',
+    email: 'nila@gmail.com',
+    age: 44,
+    role: 'viewer',
+    status: 'active',
+  },
+  {
+    id: 4,
+    name: 'Siam',
+    email: 'siam@gmail.com',
+    age: 38,
+    role: 'editor',
+    status: 'active',
+  },
+  {
+    id: 5,
+    name: 'Tania',
+    email: 'tania@gmail.com',
+    age: 22,
+    role: 'viewer',
+    status: 'active',
+  },
+  {
+    id: 6,
+    name: 'Arif',
+    email: 'arif@gmail.com',
+    age: 35,
+    role: 'admin',
+    status: 'inactive',
+  },
+  {
+    id: 7,
+    name: 'Mira',
+    email: 'mira@gmail.com',
+    age: 29,
+    role: 'editor',
+    status: 'active',
+  },
 ];
 
 const products: Product[] = [
@@ -108,21 +161,23 @@ export function getCartTotal(items: CartItem[]): number {
 // 1. Search users by partial name (case-insensitive)
 export function searchUsers(allUsers: User[], query: string): User[] {
   // TODO: implement
-  return allUsers.filter((user) => user.name.includes(query));
+  return allUsers.filter((user) =>
+    user.name.toLocaleLowerCase().includes(query.toLocaleLowerCase())
+  );
 }
 
 // 2. Sort users by age (asc or desc)
 export function sortUsersByAge(allUsers: User[], asc: boolean = true): User[] {
   // TODO: implement
   return asc
-    ? allUsers.sort((a, b) => b.age - a.age)
-    : allUsers.sort((a, b) => a.age - b.age);
+    ? [...allUsers].sort((a, b) => a.age - b.age)
+    : [...allUsers].sort((a, b) => b.age - a.age);
 }
 
 // 3. Get users with inactive status
 export function getInactiveUsers(allUsers: User[]): User[] {
   // TODO: implement
-  return allUsers?.filter((user) => user.status === 'inactive');
+  return allUsers.filter((user) => user.status === 'inactive');
 }
 
 // 4. Find user by email
@@ -131,8 +186,8 @@ export function findUserByEmail(
   email: string
 ): User | undefined {
   // TODO: implement
-  return allUsers.find((user) =>
-    email.toLocaleLowerCase().includes(user.name.toLocaleLowerCase())
+  return allUsers.find(
+    (user) => user.email.toLocaleLowerCase() === email.toLocaleLowerCase()
   );
 }
 
@@ -145,7 +200,7 @@ export function hasAdmin(allUsers: User[]): boolean {
 // 6. Extract all user emails
 export function getUserEmails(allUsers: User[]): string[] {
   // TODO: implement
-  return allUsers.map((user) => user.name.toLocaleLowerCase() + '@gmail.com');
+  return allUsers.map((user) => user.email);
 }
 
 // 7. Get distinct roles from users
@@ -202,13 +257,15 @@ export function getProductsInPriceRange(
   max: number
 ): Product[] {
   // TODO: implement
-  return [];
+  return allProducts.filter(
+    (product) => product.price >= min && product.price <= max
+  );
 }
 
 // 14. Sum all cart item quantities
 export function getTotalCartQuantity(items: CartItem[]): number {
   // TODO: implement
-  return 0;
+  return items.reduce((sum, item) => sum + item?.quantity, 0);
 }
 
 // 15. Cart items with name + subtotal
@@ -216,7 +273,10 @@ export function getCartSummary(
   items: CartItem[]
 ): { name: string; subtotal: number }[] {
   // TODO: implement
-  return [];
+  return items.map((item) => ({
+    name: item.name,
+    subtotal: item.price * item.quantity,
+  }));
 }
 
 // ─── Console Tests ───────────────────────────────────────────────────────────
