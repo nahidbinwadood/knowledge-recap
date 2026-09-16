@@ -108,77 +108,99 @@ export function getCartTotal(items: CartItem[]): number {
 // 1. Search users by partial name (case-insensitive)
 export function searchUsers(allUsers: User[], query: string): User[] {
   // TODO: implement
-  return [];
+  return allUsers.filter((user) => user.name.includes(query));
 }
 
 // 2. Sort users by age (asc or desc)
 export function sortUsersByAge(allUsers: User[], asc: boolean = true): User[] {
   // TODO: implement
-  return [];
+  return asc
+    ? allUsers.sort((a, b) => b.age - a.age)
+    : allUsers.sort((a, b) => a.age - b.age);
 }
 
 // 3. Get users with inactive status
 export function getInactiveUsers(allUsers: User[]): User[] {
   // TODO: implement
-  return [];
+  return allUsers?.filter((user) => user.status === 'inactive');
 }
 
 // 4. Find user by email
-export function findUserByEmail(allUsers: User[], email: string): User | undefined {
+export function findUserByEmail(
+  allUsers: User[],
+  email: string
+): User | undefined {
   // TODO: implement
-  return undefined;
+  return allUsers.find((user) =>
+    email.toLocaleLowerCase().includes(user.name.toLocaleLowerCase())
+  );
 }
 
 // 5. Check if any user is admin
 export function hasAdmin(allUsers: User[]): boolean {
   // TODO: implement
-  return false;
+  return allUsers.some((user) => user.role === 'admin');
 }
 
 // 6. Extract all user emails
 export function getUserEmails(allUsers: User[]): string[] {
   // TODO: implement
-  return [];
+  return allUsers.map((user) => user.name.toLocaleLowerCase() + '@gmail.com');
 }
 
 // 7. Get distinct roles from users
 export function getUniqueRoles(allUsers: User[]): Role[] {
   // TODO: implement
-  return [];
+  return allUsers.reduce((role: Role[], user) => {
+    if (user.role) {
+      if (!role.includes(user.role)) {
+        role.push(user.role);
+      }
+    }
+    return role;
+  }, []);
 }
 
 // 8. Find user with minimum age
 export function getYoungestUser(allUsers: User[]): User | undefined {
   // TODO: implement
-  return undefined;
+  return allUsers.reduce((min, user) => {
+    return min.age > user?.age ? user : min;
+  }, allUsers[0]);
 }
 
 // 9. Check if specific user is active
 export function isUserActive(allUsers: User[], userId: number): boolean {
   // TODO: implement
-  return false;
+  return allUsers.find((user) => user.id === userId)?.status === 'active';
 }
 
 // 10. Count number of admin users
 export function countAdmins(allUsers: User[]): number {
   // TODO: implement
-  return 0;
+  return allUsers.filter((user) => user.role === 'admin').length;
 }
 
 // 11. Get users who are active AND editors
 export function getActiveEditors(allUsers: User[]): User[] {
   // TODO: implement
-  return [];
+  return allUsers.filter(
+    (user) => user.role === 'editor' && user.status == 'active'
+  );
 }
 
 // 12. Find user by ID
 export function getUserById(allUsers: User[], id: number): User | undefined {
   // TODO: implement
-  return undefined;
+  return allUsers.find((user) => user.id === id);
 }
 
 // 13. Filter products within price range
-export function getProductsInPriceRange(allProducts: Product[], min: number, max: number): Product[] {
+export function getProductsInPriceRange(
+  allProducts: Product[],
+  min: number,
+  max: number
+): Product[] {
   // TODO: implement
   return [];
 }
@@ -190,7 +212,9 @@ export function getTotalCartQuantity(items: CartItem[]): number {
 }
 
 // 15. Cart items with name + subtotal
-export function getCartSummary(items: CartItem[]): { name: string; subtotal: number }[] {
+export function getCartSummary(
+  items: CartItem[]
+): { name: string; subtotal: number }[] {
   // TODO: implement
   return [];
 }
@@ -198,15 +222,15 @@ export function getCartSummary(items: CartItem[]): { name: string; subtotal: num
 // ─── Console Tests ───────────────────────────────────────────────────────────
 
 // Original tasks
-console.log('Active users:', getActiveUsers(users));
-console.log('Average age:', getAverageAge(users));
-console.log('Oldest user:', getOldestUser(users));
-console.log('Names:', getUserNames(users));
-console.log('Users by role:', groupUsersByRole(users));
-console.log('Users by status:', countUsersByStatus(users));
-console.log('Unique values:', removeDuplicates([1, 2, 2, 3, 1]));
-console.log('Products by price:', sortProductsByPrice(products));
-console.log('Cart total:', getCartTotal(cart));
+// console.log('Active users:', getActiveUsers(users));
+// console.log('Average age:', getAverageAge(users));
+// console.log('Oldest user:', getOldestUser(users));
+// console.log('Names:', getUserNames(users));
+// console.log('Users by role:', groupUsersByRole(users));
+// console.log('Users by status:', countUsersByStatus(users));
+// console.log('Unique values:', removeDuplicates([1, 2, 2, 3, 1]));
+// console.log('Products by price:', sortProductsByPrice(products));
+// console.log('Cart total:', getCartTotal(cart));
 
 // Production-relevant tasks
 console.log('\n── Production Tasks ──');
