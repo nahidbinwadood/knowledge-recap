@@ -5,10 +5,10 @@ memorize every array method.
 
 ## Start here
 
-1. Install the small local toolchain once: `npm install`
+1. Install the small local toolchain once: `pnpm install`
 2. Open [practice.ts](./practice.ts).
 3. Pick one `TODO`, write pseudocode as a comment, then implement it yourself.
-4. Uncomment that function's `console.log` line and run `npm run day:01`.
+4. Uncomment that function's `console.log` line and run `pnpm run day:01`.
 5. When you are finished, write what happened in [notes.md](./notes.md).
 
 ## Exercises
@@ -32,7 +32,7 @@ memorize every array method.
 ## Useful commands
 
 ```powershell
-npm install
-npm run day:01
-npm run typecheck
+pnpm install
+pnpm run day:01
+pnpm run typecheck
 ```

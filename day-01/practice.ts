@@ -2,7 +2,7 @@
  * Day 1 — JavaScript/TypeScript arrays and objects
  *
  * Work through one function at a time. First write a short plan in a comment,
- * then implement it, then run `npm run day:01` to inspect the result.
+ * then implement it, then run `pnpm run day:01` to inspect the result.
  */
 
 type Role = 'admin' | 'editor' | 'viewer';
