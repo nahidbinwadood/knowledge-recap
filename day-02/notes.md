@@ -133,4 +133,5 @@ lexical position or lexical index holo kono ekta code ,kono specific file er kot
 ##what is lexical scope.
 ##what is Global Execution Context. 
 ##what are the phases of Global Execution context or any code execution context.
+### heap vs stack
 

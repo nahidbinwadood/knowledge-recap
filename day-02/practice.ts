@@ -14,16 +14,18 @@
 // TODO: Identify which values are primitive and which are non-primitive.
 // Log the type of each value using typeof.
 
-// const stringValue = 'hello';
-// const numberValue = 42;
-// const booleanValue = true;
-// const nullValue = null;
-// const undefinedValue = undefined;
-// const symbolValue = Symbol('id');
-// const bigintValue = 100n;
-// const objectValue = { name: 'Nahid' };
-// const arrayValue = [1, 2, 3];
-// const functionValue = () => {};
+const stringValue = 'hello';
+const numberValue = 42;
+const booleanValue = true;
+const nullValue = null;
+const undefinedValue = undefined;
+const symbolValue = Symbol('id');
+const bigintValue = 100n;
+const objectValue = { name: 'Nahid' };
+const arrayValue = [1, 2, 3];
+const functionValue = () => {};
+
+//here the objective,function and the arrays are the non primitive and rest of them is primitive.
 
 // TODO: Log typeof for each value above
 // Expected output:
@@ -37,6 +39,17 @@
 // object
 // object (arrays are objects)
 // function
+
+// console.log(typeof(stringValue))
+// console.log(typeof(numberValue))
+// console.log(typeof(booleanValue))
+// console.log(typeof(nullValue))
+// console.log(typeof(undefinedValue))
+// console.log(typeof(symbolValue))
+// console.log(typeof(bigintValue))
+// console.log(typeof(objectValue))
+// console.log(typeof(arrayValue))
+// console.log(typeof(functionValue))
 
 // ------------------------------------------------------------
 // 2. VALUE COMPARISON — Primitives Compare by Value
@@ -73,29 +86,437 @@
 
 // TODO: Why does this matter?
 // If you modify obj3.name, what happens to obj1.name?
+// as both objects are referencing the same memory so if we change obj3.name then the main object will change and it will reflect for the obj1.
 
 // ------------------------------------------------------------
 // 4. MEMORY STORAGE — Stack vs Heap
 // ------------------------------------------------------------
-// TODO: Understand where different types are stored.
-// Primitives: stored in stack (simple, fixed size)
-// Objects: stored in heap (complex, dynamic size)
 
-// // Primitive example — stored in stack
+// TODO: Understand how JavaScript variables and objects are represented in memory.
+
+// Important note:
+// "Primitive = Stack" and "Object = Heap" is a simplified mental model.
+// JavaScript itself does not specify that primitives must be stored on the
+// stack or objects must be stored on the heap. JavaScript engines decide
+// how values are actually represented internally.
+//
+// For learning, we can use this simplified model:
+// - Primitive variables hold primitive values.
+// - Object variables hold references to objects.
+// - Objects are commonly represented as existing in heap memory.
+// - Assigning a primitive copies its value.
+// - Assigning an object copies its reference.
+
+// ------------------------------------------------------------
+// 1. GLOBAL EXECUTION CONTEXT
+// ------------------------------------------------------------
+
+// When JavaScript starts executing a script, it creates a
+// Global Execution Context (GEC).
+//
+// In a browser environment, the global object is `window`.
+// In that environment, `this` at the top level of a classic
+// script refers to the global object.
+//
+// However, this does NOT mean that `this` always refers to `window`.
+// The value of `this` depends on the execution context and environment.
+//
+// The GEC can be understood using two simplified phases:
+//
+// 1. Creation / setup phase
+// 2. Execution phase
+//
+// During the creation/setup phase, JavaScript prepares the
+// declarations and bindings.
+//
+// Important:
+// `let` and `const` variables are NOT initialized with `undefined`
+// during this phase.
+//
+// They are created but remain uninitialized until execution reaches
+// their declaration. This period is called the Temporal Dead Zone (TDZ).
+//
+// Example:
+//
+// console.log(primitive1); // ReferenceError
 // let primitive1 = 10;
-// let primitive2 = primitive1; // Copy the value
+//
+// With `var`, the behavior is different:
+//
+// console.log(value); // undefined
+// var value = 10;
+//
+// So we should NOT think:
+//
+// let primitive1 = undefined;
+//
+// during the creation phase.
+
+// ------------------------------------------------------------
+// 2. PRIMITIVE EXAMPLE
+// ------------------------------------------------------------
+
+let primitive1 = 10;
+
+let primitive2 = primitive1; // Copy the primitive value
+
+primitive2 = 20;
+
+console.log(primitive1); // 10
+console.log(primitive2); // 20
+
+// ------------------------------------------------------------
+// EXECUTION OF THE PRIMITIVE EXAMPLE
+// ------------------------------------------------------------
+
+// Step 1:
+//
+// let primitive1 = 10;
+//
+// During execution, the value `10` is assigned to primitive1.
+//
+// Simplified memory:
+//
+// Stack
+// ----------------
+// primitive1 → 10
+//
+//
+// Step 2:
+//
+// let primitive2 = primitive1;
+//
+// JavaScript evaluates primitive1 and gets the value `10`.
+//
+// Because primitive1 contains a primitive value, primitive2 receives
+// its own copy of that value.
+//
+// Simplified memory:
+//
+// Stack
+// ----------------
+// primitive1 → 10
+// primitive2 → 10
+//
+//
+// There is no shared object here.
+//
+// Both variables independently contain the primitive value 10.
+//
+//
+// Step 3:
+//
 // primitive2 = 20;
-// console.log(primitive1); // Expected: 10 (unchanged)
-// console.log(primitive2); // Expected: 20
+//
+// Now only primitive2 is changed.
+//
+// Simplified memory:
+//
+// Stack
+// ----------------
+// primitive1 → 10
+// primitive2 → 20
+//
+//
+// primitive1 remains 10 because primitive2 received a copy of the value.
+//
+//
+// Step 4:
+//
+// console.log(primitive1);
+// console.log(primitive2);
+//
+// Output:
+//
+// 10
+// 20
 
-// // Object example — stored in heap
+// ------------------------------------------------------------
+// 3. OBJECT EXAMPLE
+// ------------------------------------------------------------
+
+let object1 = { value: 10 };
+
+let object2 = object1; // Copy the object reference
+
+object2.value = 20;
+
+console.log(object1.value); // 20
+console.log(object2.value); // 20
+
+// ------------------------------------------------------------
+// EXECUTION OF THE OBJECT EXAMPLE
+// ------------------------------------------------------------
+
+// Step 1:
+//
 // let object1 = { value: 10 };
-// let object2 = object1; // Copy the reference
-// object2.value = 20;
-// console.log(object1.value); // Expected: 20 (changed!)
-// console.log(object2.value); // Expected: 20
+//
+// The object literal { value: 10 } is evaluated during execution.
+//
+// A new object is created.
+//
+// Simplified heap:
+//
+// Heap
+// ----------------------------
+// Object A
+// {
+//     value: 10
+// }
+//
+// object1 stores a reference to Object A.
+//
+// Simplified stack:
+//
+// Stack
+// ----------------------------
+// object1 → Reference A
+//
+//
+// Important:
+//
+// object1 does NOT contain the entire object itself.
+//
+// It contains a reference that allows JavaScript to access
+// the object created in memory.
 
-// TODO: Draw a memory diagram for both examples above.
+// ------------------------------------------------------------
+// Step 2:
+//
+// let object2 = object1;
+//
+// JavaScript evaluates object1.
+//
+// object1 contains a reference to Object A.
+//
+// That reference is copied into object2.
+//
+// No new object is created here.
+//
+// Simplified memory:
+//
+// Stack
+// ----------------------------
+// object1 → Reference A
+// object2 → Reference A
+//
+// Heap
+// ----------------------------
+// Object A
+// {
+//     value: 10
+// }
+//
+//
+//
+// This is the most important difference from the primitive example.
+//
+// Primitive:
+//
+// primitive2 = primitive1
+//
+// → copies the primitive value.
+//
+// Object:
+//
+// object2 = object1
+//
+// → copies the reference to the object.
+
+// ------------------------------------------------------------
+// Step 3:
+//
+// object2.value = 20;
+//
+// object2 contains Reference A.
+//
+// JavaScript follows that reference and finds Object A.
+//
+// Then it changes the `value` property of Object A.
+//
+// Before:
+//
+// Heap
+// ----------------------------
+// Object A
+// {
+//     value: 10
+// }
+//
+// After:
+//
+// Heap
+// ----------------------------
+// Object A
+// {
+//     value: 20
+// }
+//
+//
+//
+// Since object1 also points to Object A:
+//
+// object1 → Reference A
+// object2 → Reference A
+//
+// both variables can see the updated value.
+//
+//
+// Therefore:
+//
+// console.log(object1.value); // 20
+// console.log(object2.value); // 20
+
+// ------------------------------------------------------------
+// 4. COMPLETE MEMORY DIAGRAM
+// ------------------------------------------------------------
+
+// PRIMITIVE EXAMPLE
+//
+// Stack
+// ┌────────────────────────┐
+// │ primitive1 → 10        │
+// │ primitive2 → 20        │
+// └────────────────────────┘
+//
+// There is no shared mutable object.
+//
+// primitive2 received a copy of primitive1's value.
+
+// OBJECT EXAMPLE
+//
+// Stack                         Heap
+// ┌───────────────────┐         ┌─────────────────────┐
+// │ object1 → Ref A ──┼────────→│ Object A            │
+// │ object2 → Ref A ──┼────────→│ { value: 20 }      │
+// └───────────────────┘         └─────────────────────┘
+//
+//
+// object1 and object2 are different variables.
+//
+// But both variables contain the same reference.
+//
+// Therefore, both variables point to the same object.
+
+// ------------------------------------------------------------
+// 5. VERY IMPORTANT: REASSIGNMENT VS MUTATION
+// ------------------------------------------------------------
+
+// Mutation:
+//
+// let object1 = { value: 10 };
+// let object2 = object1;
+//
+// object2.value = 20;
+//
+// Here we changed a property of the existing object.
+//
+// Both variables still point to the same object.
+//
+//
+// Reassignment:
+//
+// let object1 = { value: 10 };
+// let object2 = object1;
+//
+// object2 = { value: 20 };
+//
+// Here we did NOT change the original object.
+//
+// Instead, object2 was given a reference to a NEW object.
+//
+// Simplified:
+//
+// Before:
+//
+// object1 ───────→ Object A { value: 10 }
+// object2 ───────→ Object A { value: 10 }
+//
+//
+// After:
+//
+// object1 ───────→ Object A { value: 10 }
+//
+// object2 ───────→ Object B { value: 20 }
+
+// ------------------------------------------------------------
+// 6. FINAL MENTAL MODEL
+// ------------------------------------------------------------
+
+// Primitive:
+//
+// let a = 10;
+// let b = a;
+//
+// a → 10
+// b → 10
+//
+// The value is copied.
+//
+//
+//
+// Object:
+//
+// let a = { value: 10 };
+// let b = a;
+//
+// a ──→ Object A
+// b ──→ Object A
+//
+// The reference is copied.
+//
+//
+//
+// So the most useful rule to remember is:
+//
+// Primitive assignment → copy the value.
+//
+// Object assignment → copy the reference.
+//
+//
+//
+// And remember:
+//
+// `object1` and `object2` are NOT the same variable.
+//
+// They are two separate variables that happen to reference
+// the same object.
+
+// ------------------------------------------------------------
+// TODO
+// ------------------------------------------------------------
+
+// 1. Draw the primitive memory diagram yourself.
+//
+// 2. Draw the object memory diagram yourself.
+//
+// 3. Explain in your own words:
+//
+//    Why does this:
+//
+//    object2.value = 20;
+//
+//    change object1.value?
+//
+// 4. Explain the difference between:
+//
+//    object2.value = 20;
+//
+//    and
+//
+//    object2 = { value: 20 };
+//
+// 5. Next, explore:
+//
+//    - Pass by value
+//    - Object references
+//    - Shallow copy
+//    - Deep copy
+//    - Object.assign()
+//    - Spread operator (...)
+//    - structuredClone()
+//    - Equality: == vs ===
 
 // ------------------------------------------------------------
 // 5. EQUALITY OPERATORS — === vs == vs Object.is
