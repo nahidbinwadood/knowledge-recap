@@ -3,8 +3,8 @@
   "private": true,
   "version": "0.1.0",
   "scripts": {
-    "day:01": "tsx day-01/practice.ts",
-    "day:02": "tsx day-02/practice.ts",
+    "day:01": "tsx watch day-01/practice.ts",
+    "day:02": "tsx watch day-02/practice.ts",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
