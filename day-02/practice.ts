@@ -552,6 +552,8 @@ console.log(object2.value); // 20
 
 // TODO: What happens if you declare a variable without let/const/var?
 
+// it becomes a global variable.
+
 // ------------------------------------------------------------
 // 7. FUNCTION SCOPE — Variables Inside Functions
 // ------------------------------------------------------------
@@ -564,6 +566,8 @@ console.log(object2.value); // 20
 // // console.log(functionVar); // Expected: ReferenceError
 
 // TODO: Why can't you access functionVar outside the function?
+
+// the variable is declared in the function scope that is why we can access from the function body only.if we want to access from outside of the function scope({}) then we will got an reference error.
 
 // ------------------------------------------------------------
 // 8. BLOCK SCOPE — Variables Inside Blocks
@@ -582,6 +586,8 @@ console.log(object2.value); // 20
 // blockScope();
 
 // TODO: What's the difference between const/let and var in blocks?
+
+// let and const are block scopes. and var are function scopes. var can be accessed any where in any function and const/let can be access inside blocks only ({})
 
 // ------------------------------------------------------------
 // 9. LEXICAL SCOPE — Nested Functions Access Outer Variables
@@ -602,6 +608,8 @@ console.log(object2.value); // 20
 // outer();
 
 // TODO: Why can inner() access outerVar but outer() can't access innerVar?
+
+//in simples way, the children can access the parents variable but parent cannot access the children value. we know that js compiler will compile the code from top to bottom. so when we try to access a variable which is not in the upper scope then js return a reference error. lexical scope is a term, where the compiler try to access the value from the closest scope first then if the value is not find there then it try to find it from the upper scope like this goes like a chain and it stops after going to the global scope. so when the inner func, wants to access the outerValue then first it will search inside the close scope which is the function scope, when it not found in the function scope, then it goes to the one layer upper scope which is outerfunction scope, then it got the variable and print it. if the value was not there then it will go to one more upper scope till it reaches the global scope if the value not found. that is why the inner can assess the parents scope. when the outer func call then after the inner func declaration, it tries to access the value which is inside inner function and its a separate scope so the value innerVar is only accessible inside inner function. so this is why it gets error .
 
 // ------------------------------------------------------------
 // 10. HOISTING — var, let, const, Function Declarations
