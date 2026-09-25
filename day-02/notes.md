@@ -125,13 +125,17 @@ name:'nahid'
 
 literal just a syntax of explanation of data types are written. so "" is string literal, 24 will be number literal, false will be boolean literal, [] array literal.
 
-stack memory te  primitive data gulo store hoy and heap memory te non primitive data types er reference create hoy.
+stack memory te primitive data gulo store hoy and heap memory te non primitive data types er reference create hoy.
 
 lexical position or lexical index holo kono ekta code ,kono specific file er koto number line e ache shetar declaration.
 
-
 ##what is lexical scope.
-##what is Global Execution Context. 
+##what is Global Execution Context.
 ##what are the phases of Global Execution context or any code execution context.
+
 ### heap vs stack
 
+##what is hoisting.
+##global scope vs function scope vs block scope
+##hoiting and temporal deadzone
+##what is closuer.

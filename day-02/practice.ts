@@ -162,8 +162,8 @@ let primitive2 = primitive1; // Copy the primitive value
 
 primitive2 = 20;
 
-console.log(primitive1); // 10
-console.log(primitive2); // 20
+// console.log(primitive1); // 10
+// console.log(primitive2); // 20
 
 // ------------------------------------------------------------
 // EXECUTION OF THE PRIMITIVE EXAMPLE
@@ -241,8 +241,8 @@ let object2 = object1; // Copy the object reference
 
 object2.value = 20;
 
-console.log(object1.value); // 20
-console.log(object2.value); // 20
+// console.log(object1.value); // 20
+// console.log(object2.value); // 20
 
 // ------------------------------------------------------------
 // EXECUTION OF THE OBJECT EXAMPLE
@@ -609,7 +609,7 @@ console.log(object2.value); // 20
 
 // TODO: Why can inner() access outerVar but outer() can't access innerVar?
 
-//in simples way, the children can access the parents variable but parent cannot access the children value. we know that js compiler will compile the code from top to bottom. so when we try to access a variable which is not in the upper scope then js return a reference error. lexical scope is a term, where the compiler try to access the value from the closest scope first then if the value is not find there then it try to find it from the upper scope like this goes like a chain and it stops after going to the global scope. so when the inner func, wants to access the outerValue then first it will search inside the close scope which is the function scope, when it not found in the function scope, then it goes to the one layer upper scope which is outerfunction scope, then it got the variable and print it. if the value was not there then it will go to one more upper scope till it reaches the global scope if the value not found. that is why the inner can assess the parents scope. when the outer func call then after the inner func declaration, it tries to access the value which is inside inner function and its a separate scope so the value innerVar is only accessible inside inner function. so this is why it gets error .
+//in simples way, the children can access the parents variable but parent cannot access the children value. we know that js compiler will compile the code from top to bottom. so when we try to access a variable which is not in the upper scope then js return a reference error. lexical scope is a term, where the compiler try to access the value from the closest scope first then if the value is not find there then it try to find it from the upper scope like this goes like a chain and it stops after going to the global scope. so when the inner func, wants to access the outerValue then first it will search inside the close scope which is the function scope, when it not found in the function scope, then it goes to the one layer upper scope which is outer function scope, then it got the variable and print it. if the value was not there then it will go to one more upper scope till it reaches the global scope if the value not found. that is why the inner can assess the parents scope. when the outer func call then after the inner func declaration, it tries to access the value which is inside inner function and its a separate scope so the value innerVar is only accessible inside inner function. so this is why it gets error .
 
 // ------------------------------------------------------------
 // 10. HOISTING — var, let, const, Function Declarations
@@ -633,6 +633,8 @@ console.log(object2.value); // 20
 
 // TODO: Why does this error happen? What is the Temporal Dead Zone?
 
+//in javascript runtime, there are two phases, one is creation phase and other one is execution phase. in the creation phase, the functions and variables are assigned and initialized and in the execution phase ,those variables and functions are replaced by the values and execution the function. so for the var, when a variable has been declared with var,so in the creation phase, the variable var is bind the with the variable name and initialized that with undefined and in the execution phase, the actual value is assigned. so we can access the value of var before the line its been declared but we can get undefined. whereas, the let /const do the same ,i mean they both hoisted in the creation phase and also do bind with the variable name but they are not initialized with anything, that is why , nothing is been assigned to that reference, if we try to access that value before the declaration file ,then js will throw the reference error as it dont find any reference to print the value. so the temporal dead zone is the place, just an imaginary place its actually. its starts when the value is bind to the variable to the line where let/const value is initialized. in between that place is called temporal dead zone
+
 // ============================================================
 // PHASE 3: CLOSURES & `this`
 // ============================================================
@@ -648,7 +650,18 @@ console.log(object2.value); // 20
 // The count should NOT be accessible from outside.
 
 // function createCounter(initial: number) {
-//   // your code here
+//   let initialValue = initial;
+//   function increment() {
+//     return initialValue += 1;
+//   }
+//   function decrement() {
+//     return initialValue-= 1;
+//   }
+//   function getCount() {
+//     return initialValue;
+//   }
+
+//   return { increment, decrement, getCount };
 // }
 
 // const counter = createCounter(0);
@@ -656,7 +669,7 @@ console.log(object2.value); // 20
 // counter.increment();
 // counter.increment();
 // counter.decrement();
-// console.log("Counter:", counter.getCount()); // Expected: 2
+// console.log('Counter:', counter.getCount()); // Expected: 2
 
 // ------------------------------------------------------------
 // 12. CLOSURE — Private Bank Account
@@ -668,16 +681,56 @@ console.log(object2.value); // 20
 //   - getHistory() — returns array of all transactions {type, amount, balance}
 // Balance and history should NOT be accessible from outside.
 
-// function createBankAccount(owner: string, initialBalance: number) {
-//   // your code here
-// }
+function createBankAccount(owner: string, initialBalance: number) {
+  // your code here
+  const history: {
+    type: 'withdraw' | 'deposit' | 'initial';
+    amount: number;
+    balance: number;
+  }[] = [];
 
-// const account = createBankAccount("Nahid", 1000);
+  if (initialBalance) {
+    history.push({
+      type: 'initial',
+      amount: initialBalance,
+      balance: initialBalance,
+    });
+  }
+
+  let balance = initialBalance;
+
+  function deposit(amount: number) {
+    balance += amount;
+    history.push({
+      type: 'deposit',
+      amount,
+      balance,
+    });
+  }
+  function withdraw(amount: number) {
+    balance -= amount;
+    history.push({
+      type: 'withdraw',
+      amount,
+      balance,
+    });
+  }
+  function getBalance() {
+    return balance;
+  }
+  function getHistory() {
+    return history;
+  }
+
+  return { deposit, withdraw, getBalance, getHistory };
+}
+
+// const account = createBankAccount('Nahid', 1000);
 // account.deposit(500);
 // account.withdraw(200);
 // account.deposit(300);
-// console.log("Balance:", account.getBalance()); // Expected: 1600
-// console.log("History:", account.getHistory());
+// console.log('Balance:', account.getBalance()); // Expected: 1600
+// console.log('History:', account.getHistory());
 
 // ------------------------------------------------------------
 // 13. FUNCTION FACTORY — Multiplier
@@ -685,14 +738,16 @@ console.log(object2.value); // 20
 // TODO: Create a function `createMultiplier` that takes a number
 // and returns a new function that multiplies any input by that number.
 
-// function createMultiplier(multiplier: number) {
-//   // your code here
-// }
+function createMultiplier(multiplier: number) {
+  return function (multiplyValue: number) {
+    return multiplier * multiplyValue;
+  };
+}
 
 // const double = createMultiplier(2);
 // const triple = createMultiplier(3);
-// console.log("Double 5:", double(5));   // Expected: 10
-// console.log("Triple 5:", triple(5));   // Expected: 15
+// console.log('Double 5:', double(5)); // Expected: 10
+// console.log('Triple 5:', triple(5)); // Expected: 15
 
 // ------------------------------------------------------------
 // 14. `this` CONTEXT — Person Object
