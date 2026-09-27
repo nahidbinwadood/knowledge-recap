@@ -1,0 +1,208 @@
+{
+    "workbench.colorTheme": "Learn with Sumit - Peace of the eye",
+    "editor.fontSize": 22,
+    "editor.fontFamily": "Fira Code",
+    "editor.fontLigatures": true,
+  
+    "editor.cursorBlinking": "phase",
+    "editor.cursorSmoothCaretAnimation": "on",
+    "editor.smoothScrolling": true,
+    "editor.wordWrap": "on",
+    "editor.minimap.enabled": false,
+    "editor.hover.enabled": "on",
+    "editor.codeLens": false,
+    "editor.stickyScroll.enabled": false,
+    "workbench.list.smoothScrolling": true,
+    "terminal.integrated.smoothScrolling": true,
+    "editor.cursorStyle": "line",
+    "editor.cursorWidth": 2,
+  
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": false,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit",
+      "source.fixAll.tslint": "explicit",
+    },
+    "files.trimTrailingWhitespace": true,
+  
+    "prettier.requireConfig": false,
+    "prettier.singleQuote": true,
+    "prettier.trailingComma": "es5",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  
+    "[javascript]": {
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "[javascriptreact]": {
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "[typescript]": {
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "[typescriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "[html]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "[css]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "[python]": {
+      "editor.defaultFormatter": "ms-python.black-formatter",
+      "editor.formatOnSave": true,
+    },
+    "eslint.run": "onSave",
+    "eslint.validate": [
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact",
+    ],
+  
+    "emmet.includeLanguages": {
+      "javascript": "javascriptreact",
+      "typescript": "typescriptreact",
+    },
+    "emmet.triggerExpansionOnTab": true,
+  
+    "javascript.validate.enable": true,
+    "typescript.validate.enable": true,
+    "javascript.suggest.completeFunctionCalls": true,
+    "typescript.suggest.completeFunctionCalls": true,
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "typescript.tsserver.maxTsServerMemory": 3072,
+    "typescript.preferences.includePackageJsonAutoImports": "off",
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "typescript.updateImportsOnFileMove.enabled": "always",
+  
+    "editor.quickSuggestions": {
+      "other": "on",
+      "comments": "off",
+      "strings": "on",
+    },
+    "editor.suggestOnTriggerCharacters": true,
+    "editor.acceptSuggestionOnCommitCharacter": true,
+    "editor.acceptSuggestionOnEnter": "on",
+    "editor.tabCompletion": "on",
+    "editor.inlineSuggest.enabled": true,
+    "editor.suggest.preview": true,
+    "editor.suggest.showWords": true,
+  
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+  
+    "terminal.integrated.defaultProfile.windows": "Git Bash",
+    "terminal.integrated.enableMultiLinePasteWarning": false,
+    "terminal.integrated.stickyScroll.enabled": false,
+  
+    "powermode.enabled": true,
+    "powermode.presets": "flames",
+    "powermode.combo.location": "off",
+    "powermode.shake.enabled": false,
+    "powermode.explosions.backgroundMode": "image",
+    "powermode.explosions.maxExplosions": 1,
+    "powermode.explosions.frequency": 3,
+    "powermode.explosions.size": 8,
+    "powermode.explosions.duration": 300,
+  
+    "gitlens.views.scm.grouped.views": {
+      "commits": true,
+      "branches": true,
+      "remotes": false,
+      "stashes": false,
+      "tags": false,
+      "worktrees": false,
+      "contributors": false,
+      "fileHistory": false,
+      "repositories": true,
+      "searchAndCompare": false,
+      "launchpad": false,
+    },
+    "gitlens.blame.toggleMode": "window",
+    "gitlens.hovers.enabled": false,
+    "gitlens.codeLens.enabled": false,
+    "gitlens.statusBar.enabled": false,
+    "gitlens.blame.highlight.enabled": false,
+    "gitlens.ai.model": "vscode",
+    "gitlens.ai.vscode.model": "copilot:gpt-4.1",
+  
+    "git.autofetch": true,
+    "git.openRepositoryInParentFolders": "always",
+    "git.detectSubmodules": false,
+    "git.decorations.enabled": false,
+    "git.enableSmartCommit": true,
+  
+    "github.copilot.enable": {
+      "*": false,
+      "plaintext": false,
+      "markdown": false,
+      "scminput": false,
+      "typescriptreact": false,
+    },
+    "github.copilot.nextEditSuggestions.enabled": false,
+  
+    "security.workspace.trust.untrustedFiles": "open",
+    "workbench.editor.empty.hint": "hidden",
+    "workbench.settings.enableNaturalLanguageSearch": false,
+    "workbench.editor.limit.enabled": true,
+    "workbench.editor.limit.value": 10,
+    "workbench.editor.limit.perEditorGroup": true,
+  
+    "auto-close-tag.activationOnLanguage": [
+      "xml",
+      "html",
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact",
+    ],
+  
+    "path-autocomplete.extensionOnImport": true,
+    "path-autocomplete.excludedItems": {
+      "**/.git": { "when": "**" },
+      "**/.DS_Store": { "when": "**" },
+      "**/node_modules": { "when": "**" },
+      "**/.next": { "when": "**" },
+    },
+  
+    "liveServer.settings.donotShowInfoMsg": true,
+    "vsicons.dontShowNewVersionMessage": true,
+    "extensions.autoCheckUpdates": false,
+    "search.followSymlinks": false,
+  
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/bower_components": true,
+      "**/.next": true,
+      "**/dist": true,
+      "**/build": true,
+      "**/.git": true,
+    },
+  
+    "files.exclude": {
+      "**/.git": true,
+      "**/.DS_Store": true,
+      "**/node_modules": false,
+      "**/.next": true,
+    },
+  
+    "files.watcherExclude": {
+      "**/.git/objects/**": true,
+      "**/.git/subtree-cache/**": true,
+      "**/node_modules/*/**": true,
+      "**/.next/**": true,
+      "**/dist/**": true,
+      "**/build/**": true,
+    },
+    "claudeCode.preferredLocation": "panel",
+    "git.confirmSync": false,
+    "workbench.iconTheme": "material-icon-theme",
+  }
+  
