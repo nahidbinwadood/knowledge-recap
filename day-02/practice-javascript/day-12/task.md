@@ -42,7 +42,25 @@ const person = {
 
 ## 6. What is the difference between Object.keys() and Object.entries()? Explain with examples
 
+Object.keys() returns an array of keys only and Object.entries() returns an array with keys and properties inside an array.
+
+const person={
+name:'John',
+age:20
+}
+
+Object.keys(person) // ['name','age']
+Object.entries(person) // [['name','John'],['name',20]]
+
 ## 7. How do you check if an object has a certain property?
+
+Using "in" properties.
+const person={
+name:'John',
+age:20
+}
+
+console.log("name" is person) //true
 
 ## 8. What will be the output and why?
 
@@ -53,9 +71,13 @@ newPerson.name = 'Doe';
 console.log(person.name);
 ```
 
-## 9. What’s the best way to deeply copy a nested object? Expalin with examples
+the output will be doe as the newPerson and person variables are referencing the same object so by changing any properties of that object from using newPerson variable will change the actual value the object so as both variables are referencing the same object so person.name will be john
 
-## 10. Loop and print values using Object destructuiring
+## 9. What’s the best way to deeply copy a nested object? Explain with examples
+
+use structuredClone method.
+
+## 10. Loop and print values using Object destructuring
 
 ```js
 const users = [
@@ -76,3 +98,7 @@ const users = [
   },
 ];
 ```
+
+users.map(({name,address,age})={
+  console.log(`${name} is from ${address} and he is ${age} years old`)
+})
