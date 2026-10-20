@@ -99,6 +99,6 @@ const users = [
 ];
 ```
 
-users.map(({name,address,age})={
+// users.map(({name,address,age})={
   console.log(`${name} is from ${address} and he is ${age} years old`)
-})
+}) 
