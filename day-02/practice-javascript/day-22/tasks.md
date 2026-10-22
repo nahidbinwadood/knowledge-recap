@@ -81,5 +81,11 @@ function task3() {
   console.log('Task 3 done');
 }
 
+task1(() => {
+  task2(() => {
+    task3();
+  });
+});
+
 // Call them in sequence using nested callbacks
 ```
