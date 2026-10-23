@@ -3,15 +3,14 @@
 ## 1. Pass a function to greet a user and then thank them
 
 ```js
-function greet(fn) {
-  fn();
+function greet(name, fn) {
+  console.log(`Hello ${name}`);
+  fn(name);
 }
 
-function user() {
-  console.log(`Hello Nahid, Thank you`);
-}
-
-greet(user);
+greet('Nahid', (name) => {
+  console.log(`Thank you ${name}`);
+});
 ```
 
 ## 2. Implement a calculator function that accepts two numbers and a callback to perform operations like add, subtract
@@ -20,6 +19,7 @@ greet(user);
 function calculator(a, b, operationCallback) {
   const result = operationCallback(a, b);
   console.log(result);
+  return result;
 }
 
 function add(x, y) {
@@ -47,8 +47,10 @@ Also test it with subtract, multiply, divide functions.
 
 ```js
 function delayedMessage(message, delay, callback) {
-  setTimeout(callback(), delay);
-  console.log(message);
+  setTimeout(() => {
+    console.log(message);
+    callback();
+  }, delay);
 }
 
 delayedMessage('Task complete', 2000, () => console.log('Callback Fired!'));
