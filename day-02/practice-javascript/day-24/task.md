@@ -2,6 +2,21 @@
 
 ## 1. Create a function wait(ms) that returns a promise which resolves after ms milliseconds. Use async/await to log messages before and after the delay
 
+```js
+function wait(ms) {
+  console.log('Started');
+  return new Promise((resolve) =>
+    setTimeout(() => {
+      resolve('resolved');
+    }, ms)
+  );
+}
+
+const result = await wait(2000);
+
+console.log(result);
+```
+
 ## 2. Using async/await, log "One", then after 1 second log "Two", then "Three" after another 2 seconds. No setTimeout outside of promises
 
 ## 3. Use fetch() with async/await to load a local JSON file (data.json) and display its contents in the console
